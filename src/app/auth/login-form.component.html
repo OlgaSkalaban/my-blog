@@ -3,14 +3,15 @@
     <input type="text" name="email" placeholder="E-mail">
     <input type="password" placeholder="Password">
 
-    <ul>
-        
+    <firebase-ui></firebase-ui>
+
+    <!-- <ul>        
         <li *ngFor="let b of buttons">
-            {{ b }}
+            <button class="btn">{{ b }}</button>
         </li>
-    </ul>
+    </ul> -->
 
     <button class="btn" type="submit">Sign in</button>
     <small>У вас нет аккаунта?</small>
-    <button class="btn" routerLink="/login/signup">Sign out</button>
+    <button class="btn" (click)="goToSignUpPage()">Logout</button>
 </form>
