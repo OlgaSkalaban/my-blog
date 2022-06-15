@@ -8,10 +8,10 @@ import { LoginFormComponent } from './auth/login-form.component';
 import { SignupFormComponent } from './auth/signup-form/signup-form.component';
 // import { AuthModule } from './auth/auth.module';
 import { HomePageComponent } from './home-page/home-page.component';
-import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
+import { firebase, firebaseui, FirebaseUIModule } from 'firebaseui-angular';
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule, USE_EMULATOR as USE_AUTH_EMULATOR } from "@angular/fire/compat/auth";
-import {environment} from '../environments/environment';
+import { environment } from '../environments/environment';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -55,7 +55,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig)
   ],
