@@ -8,9 +8,10 @@ const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forRoot([
-    {path: '', component: HomePageComponent, pathMatch: 'full'},
+    {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'login', component: LoginFormComponent},
-    {path: 'signup', component: SignupFormComponent}
+    {path: 'signup', component: SignupFormComponent},
+    {path: 'home', component: HomePageComponent}
   ])],
   exports: [RouterModule]
 })

@@ -1,17 +1,30 @@
-<form action="">
-    <p>SIGN UP</p>
-    <input type="text" name="email" placeholder="E-mail">
-    <input type="password" placeholder="Password">
-
-    <firebase-ui></firebase-ui>
-
-    <!-- <ul>        
-        <li *ngFor="let b of buttons">
-            <button class="btn">{{ b }}</button>
-        </li>
-    </ul> -->
-
-    <button class="btn" type="submit">Sign in</button>
-    <small>У вас нет аккаунта?</small>
-    <button class="btn" (click)="goToSignUpPage()">Logout</button>
-</form>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <h4 class="text-dark text-muted">Login</h4>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Email</label>
+                          <input type="email" class="form-control" name="email">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Password</label>
+                          <input type="password" class="form-control" name="password">
+                        </div>
+                        
+                        <button type="button" class="btn btn-danger">Login</button>
+                        <div class="row">
+                            <div class="col-6"></div>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
