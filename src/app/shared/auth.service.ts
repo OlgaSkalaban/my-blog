@@ -37,7 +37,4 @@ export class AuthService {
       alert('smth wrong...');
     })
   }
-
-
-
 }

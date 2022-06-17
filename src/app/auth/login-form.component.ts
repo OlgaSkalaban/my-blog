@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -7,11 +7,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent{
-  constructor(private router: Router){}
 
-  buttons = ['vk', 'gmail', 'github']
+  email: string = '';
+  password: string = '';
+  constructor(private auth: AuthService) { }
 
-  goToSignUpPage() {
-    this.router.navigate(['/signup'])
-  }
+  login(){
+    if (this.email == '') {
+      alert('Please, enter email');
+      return;
+    }
+
+    if (this.password == '') {
+      alert('Please, enter password');
+      return;
+    }
+
+    this.auth.login(this.email, this.password);
+
+    this.email = '';
+    this.password = '';
+  } 
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
 })
 export class HomePageComponent {
   
-  answ: string [] = []
+  constructor(private auth: AuthService) {}
+
+  logout() {
+    
+  }
 }
