@@ -6,11 +6,11 @@ import { AuthService } from '../shared/auth.service';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent{
+export class LoginFormComponent {
 
   email: string = '';
   password: string = '';
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService) { }  
 
   login(){
     if (this.email == '') {
