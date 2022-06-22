@@ -11,6 +11,6 @@ export class HomePageComponent {
   constructor(private auth: AuthService) {}
 
   logout() {
-    
+    this.auth.logout();
   }
 }

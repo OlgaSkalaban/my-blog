@@ -27,5 +27,17 @@ export class LoginFormComponent{
 
     this.email = '';
     this.password = '';
-  } 
+  }
+
+  signInWithGoogle() {
+    this.auth.googleSignIn();
+  }
+
+  signInWithFacebook() {
+    this.auth.signInFacebook();
+  }
+
+  signInWithGithub() {
+    this.auth.signInGithub();
+  }
 }

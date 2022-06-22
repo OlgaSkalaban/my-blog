@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider } from '@angular/fire/auth'
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -29,12 +30,39 @@ export class AuthService {
     })
   }
 
-  signout() {
+  logout() {
     this.fireauth.signOut().then( ()=> {
       localStorage.removeItem('token');
       this.router.navigate(['/login']);
     }, err => {
       alert('smth wrong...');
+    })
+  }
+
+  googleSignIn() {
+    return this.fireauth.signInWithPopup(new GoogleAuthProvider).then(res => {
+      this.router.navigate(['/home']);
+      localStorage.setItem('token', JSON.stringify(res.user?.uid));
+    }, err => {
+      alert(err.message);
+    })
+  }
+
+  signInFacebook() {
+    return this.fireauth.signInWithPopup(new FacebookAuthProvider).then(res => {
+      this.router.navigate(['/home']);
+      localStorage.setItem('token', JSON.stringify(res.user?.uid));
+    }, err => {
+      alert(err.message);
+    })
+  }
+
+  signInGithub() {
+    return this.fireauth.signInWithPopup(new GithubAuthProvider).then(res => {
+      this.router.navigate(['/home']);
+      localStorage.setItem('token', JSON.stringify(res.user?.uid));
+    }, err => {
+      alert(err.message);
     })
   }
 }

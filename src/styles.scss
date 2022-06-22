@@ -23,6 +23,7 @@ body {
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 a:hover {
@@ -33,9 +34,9 @@ ul {
   list-style: none;
 }
 
-img {
-  width: 100%;
-}
+// img {
+//   width: 100%;
+// }
 
 // .btn {
 //   display: inline-block;
