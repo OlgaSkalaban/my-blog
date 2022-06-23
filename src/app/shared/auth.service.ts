@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+  userName: string = '';
+
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
   login(email: string, password: string) {
@@ -42,7 +44,9 @@ export class AuthService {
   googleSignIn() {
     return this.fireauth.signInWithPopup(new GoogleAuthProvider).then(res => {
       this.router.navigate(['/home']);
+      this.userName = JSON.stringify(res.user?.displayName);
       localStorage.setItem('token', JSON.stringify(res.user?.uid));
+      console.log(localStorage.getItem('token'));
     }, err => {
       alert(err.message);
     })
