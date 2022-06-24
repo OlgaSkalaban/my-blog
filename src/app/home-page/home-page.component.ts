@@ -7,10 +7,14 @@ import { AuthService } from '../shared/auth.service';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent {
-  
-  constructor(private auth: AuthService) {}
+
+  userName:string='';
+
+  constructor(private auth: AuthService) {}  
 
   logout() {
     this.auth.logout();
   }
+
+  
 }
