@@ -10,6 +10,7 @@ import { SignupFormComponent } from './auth/signup-form/signup-form.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from '../environments/environment';
+import { AuthGuard } from './shared/auth.guard';
 
 
 
@@ -26,7 +27,7 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule  
   ],
-  providers: [ ],
+  providers: [ AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

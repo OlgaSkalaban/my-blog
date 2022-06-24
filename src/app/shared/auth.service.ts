@@ -8,11 +8,15 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+  isLoggedIn = false;
+  redirectUrl: string | null = null;
+
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
   login(email: string, password: string) {
     this.fireauth.signInWithEmailAndPassword(email, password).then( () => {
       localStorage.setItem('token', 'true');
+      this.isLoggedIn = true;
       this.router.navigate(['home']);
     }, err => {
       alert(err.message);
@@ -33,6 +37,7 @@ export class AuthService {
   logout() {
     this.fireauth.signOut().then( ()=> {
       localStorage.removeItem('token');
+      this.isLoggedIn = false;
       this.router.navigate(['/login']);
     }, err => {
       alert('smth wrong...');
@@ -41,6 +46,7 @@ export class AuthService {
 
   googleSignIn() {
     return this.fireauth.signInWithPopup(new GoogleAuthProvider).then(res => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
       localStorage.setItem('token', JSON.stringify(res.user?.uid));
     }, err => {
@@ -50,6 +56,7 @@ export class AuthService {
 
   signInFacebook() {
     return this.fireauth.signInWithPopup(new FacebookAuthProvider).then(res => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
       localStorage.setItem('token', JSON.stringify(res.user?.uid));
     }, err => {
@@ -59,8 +66,9 @@ export class AuthService {
 
   signInGithub() {
     return this.fireauth.signInWithPopup(new GithubAuthProvider).then(res => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
-      localStorage.setItem('token', JSON.stringify(res.user?.uid));
+      localStorage.setItem('token', JSON.stringify(res.user?.uid));      
     }, err => {
       alert(err.message);
     })
