@@ -9,6 +9,7 @@ import {User} from 'src/app/shared/user';
 })
 export class AuthService {
   isLoggedIn = false;
+  redirectUrl: string = '';
   user: User = {
     id: '',
     name: ''
