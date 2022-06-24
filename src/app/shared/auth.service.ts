@@ -8,7 +8,7 @@ import {User} from 'src/app/shared/user';
   providedIn: 'root'
 })
 export class AuthService {
-
+  isLoggedIn = false;
   user: User = {
     id: '',
     name: ''
@@ -49,6 +49,7 @@ export class AuthService {
   logout() {
     this.fireauth.signOut().then( ()=> {
       localStorage.removeItem('token');
+      this.isLoggedIn = false;
       this.router.navigate(['/login']);
     }, err => {
       alert('smth wrong...');
@@ -57,6 +58,7 @@ export class AuthService {
 
   googleSignIn() {
     return this.fireauth.signInWithPopup(new GoogleAuthProvider).then(res => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
       this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName));
     }, err => {
@@ -66,6 +68,7 @@ export class AuthService {
 
   signInFacebook() {
     return this.fireauth.signInWithPopup(new FacebookAuthProvider).then(res => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
       this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName)); 
     }, err => {
@@ -75,6 +78,7 @@ export class AuthService {
 
   signInGithub() {
     return this.fireauth.signInWithPopup(new GithubAuthProvider).then(res => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
       this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName)); 
     }, err => {

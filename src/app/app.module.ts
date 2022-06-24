@@ -11,6 +11,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from '../environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AuthGuard } from './shared/auth.guard';
 
 
 
@@ -28,7 +29,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule
   ],
-  providers: [ ],
+  providers: [ AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
