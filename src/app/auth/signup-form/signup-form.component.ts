@@ -10,8 +10,6 @@ export class SignupFormComponent implements OnInit {
 
   email: string = '';
   password: string = '';
-  firstName = '';
-  lastName = '';
 
   constructor(private auth: AuthService) { }
 
@@ -33,8 +31,6 @@ export class SignupFormComponent implements OnInit {
 
     this.email = '';
     this.password = '';
-    this.firstName = '';
-    this.lastName = '';
   } 
 
 }

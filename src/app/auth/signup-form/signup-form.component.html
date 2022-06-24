@@ -2,24 +2,14 @@
     <div class="row">
         <div class="col"></div>
 
-        <div class="col-5">
-            <div class="card shadow">
+        <div class="col-4">
+            <div class="card shadow mt-5">
                 <div class="card-body">
                     <form>
                         <div class="mb-3">
                             <h4 class="text-dark text-muted">Register</h4>
                         </div>
-
-                        <div class="mb-3">
-                            <label for="exampleInputFirstName1" class="form-label">First name</label>
-                            <input type="text" class="form-control" required name="firstName" [(ngModel)]="firstName">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="exampleInputLastName1" class="form-label">Last name</label>
-                            <input type="text" class="form-control" required name="lastName" [(ngModel)]="lastName">
-                        </div>
-
+                        
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
                             <input type="email" class="form-control" required name="email" [(ngModel)]="email">
@@ -30,12 +20,12 @@
                             <input type="password" class="form-control" required name="password" [(ngModel)]="password">
                         </div>
                         
-                        <button type="button" class="btn btn-danger" (click)="register()">Register</button>
+                        <button type="button" class="btn btn-warning" (click)="register()">Register</button>
 
                         <hr>
 
                         <div class="row">
-                            <div class="col-md-6">Have an account?
+                            <div class="col">Have an account?
                                 <a routerLink="/login"><span class="text-danger">Login</span></a>
                             </div>
                         </div>

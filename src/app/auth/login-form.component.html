@@ -3,7 +3,7 @@
         <div class="col"></div>
 
         <div class="col-4">
-            <div class="card shadow mt-2">
+            <div class="card shadow mt-5">
                 <div class="card-body">
                     <form>
                         <div class="mb-3">
@@ -24,38 +24,36 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">Need account?
+                            <div class="col">Need account?
                                 <a routerLink="/signup"><span class="text-danger">Register</span></a>
                             </div>
                         </div>
 
-
-
+                        
                         <p class="card-title text-center mt-3">Sign in with</p>
 
 
-                        <div class="card-group">
-                            <div class="card">                              
-                              <div class="card-body">
-                                <a (click)="signInWithGoogle()">
-                                    <img src="../../assets/icons8-google-48.png" alt="google icon"  height="24px" width="24px"> Google
-                                </a>
-                              </div>
-                            </div>
-                            <div class="card">                              
-                              <div class="card-body">
+                        <div class="button-group-vertical d-grid">
+                          <button type="button" class="btn btn-outline-dark mb-1">
+                            <a (click)="signInWithGoogle()">
+                              <img src="../../assets/icons8-google-48.png" alt="google icon"  height="24px" width="24px"> Google
+                            </a>
+                          </button>
+                           
+                                                          
+                              <button type="button" class="btn btn-outline-dark mb-1">
                                 <a (click)="signInWithFacebook()">
                                     <img src="../../assets/icons8-facebook-48.png" alt="Facebook icon" height="24px" width="24px"> Facebook
                                 </a>
-                              </div>
-                            </div>
-                            <div class="card">                              
-                              <div class="card-body">
+                              </button>
+                            
+                                                          
+                              <button type="button" class="btn btn-outline-dark">
                                 <a (click)="signInWithGithub()">
                                     <img src="../../assets/icons8-github-48.png" alt="VK icon" height="24px" width="24px"> Github
                                 </a>
-                              </div>
-                            </div>
+                              </button>
+                           
                         </div>
                     </form>
                 </div>

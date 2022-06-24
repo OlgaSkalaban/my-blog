@@ -10,11 +10,8 @@
 //     ],
 //     imports: [
 //         RouterModule.forChild([
-//             {
-//                 path: 'login', component: LoginFormComponent, children: [
-//                     {path: 'signup', component: SignupFormComponent}
-//                 ]
-//             },            
+//             {path: 'login', component: LoginFormComponent},
+//             {path: 'signup', component: SignupFormComponent}
 //         ])
 //     ]
 // })
