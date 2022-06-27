@@ -16,8 +16,8 @@ export class AuthGuard implements CanActivate {
   } 
   
   checkLogin(url: string): true|UrlTree {
-    if (this.auth.isLoggedIn) { return true; }
-
+    if (this.auth.user.isLoggedIn) { return true; }
+    alert('You are not an authorized user. Please, log in!');
     this.auth.redirectUrl = url;
     return this.router.parseUrl('/login');
   }

@@ -12,9 +12,9 @@ export class HomePageComponent implements OnInit {
 
   constructor(private auth: AuthService) {}  
 
-  logout() {
-    this.auth.logout();
-  }
+  // logout() {
+  //   this.auth.logout();
+  // }
 
   ngOnInit() {
     this.userName = this.auth.getCurrentUser().replace(/[^a-zа-яё0-9@.]/gi, ' ');

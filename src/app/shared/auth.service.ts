@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider} from '@angular/fire/auth'
 import { Router } from '@angular/router';
-import {User} from 'src/app/shared/user';
+import { User } from 'src/app/shared/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  isLoggedIn = false;
+export class AuthService {  
   redirectUrl: string = '';
   user: User = {
     id: '',
-    name: ''
+    name: '',
+    isLoggedIn: false
   };
 
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
@@ -25,11 +25,11 @@ export class AuthService {
     }
   }
 
-
   login(email: string, password: string) {
     this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
       console.log(JSON.stringify(res));
-      this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.email));    
+      this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.email));
+      this.user.isLoggedIn = true;    
       this.router.navigate(['home']);
     }, err => {
       alert(err.message);
@@ -50,16 +50,18 @@ export class AuthService {
   logout() {
     this.fireauth.signOut().then( ()=> {
       localStorage.removeItem('token');
-      this.isLoggedIn = false;
+      this.user.isLoggedIn = false;
       this.router.navigate(['/login']);
     }, err => {
       alert('smth wrong...');
+      alert(err.message);
     })
   }
 
   googleSignIn() {
     return this.fireauth.signInWithPopup(new GoogleAuthProvider).then(res => {
-      this.isLoggedIn = true;
+      this.user.isLoggedIn = true;
+      console.log(this.user.isLoggedIn);
       this.router.navigate(['/home']);
       this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName));
     }, err => {
@@ -69,7 +71,7 @@ export class AuthService {
 
   signInFacebook() {
     return this.fireauth.signInWithPopup(new FacebookAuthProvider).then(res => {
-      this.isLoggedIn = true;
+      this.user.isLoggedIn = true;
       this.router.navigate(['/home']);
       this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName)); 
     }, err => {
@@ -79,7 +81,7 @@ export class AuthService {
 
   signInGithub() {
     return this.fireauth.signInWithPopup(new GithubAuthProvider).then(res => {
-      this.isLoggedIn = true;
+      this.user.isLoggedIn = true;
       this.router.navigate(['/home']);
       this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName)); 
     }, err => {
@@ -87,9 +89,9 @@ export class AuthService {
     })
   }
 
-  // getUserName() {
-  //   return this.user.name;
-  // }
+  getUserStatus() {
+    return this.user.isLoggedIn;
+  }
 
   setUserData(id: any, name: any) {
     this.user.id = JSON.stringify(id);
