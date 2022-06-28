@@ -11,9 +11,15 @@ export class NavbarComponent implements OnInit {
 
   constructor(private auth: AuthService) { }
 
-  ngOnInit(): void { }
-
   navUser = this.auth.user;
+
+  ngOnInit(): void { 
+    if (localStorage.getItem('token')) {
+      this.navUser.isLoggedIn = true;
+    } else {
+      console.log('Пользователь не авторизован');
+    }
+  } 
 
   logout() {
     this.auth.logout();

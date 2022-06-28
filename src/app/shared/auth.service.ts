@@ -8,7 +8,7 @@ import { User } from 'src/app/shared/user';
   providedIn: 'root'
 })
 export class AuthService {  
-  //redirectUrl: string = '';
+  redirectUrl: string = '';
   user: User = {
     id: '',
     name: '',
@@ -22,7 +22,7 @@ export class AuthService {
       const userJ = localStorage.getItem('token');
       if (userJ !== null) {
         const userObj = JSON.parse(userJ);
-        return userObj.name;
+        return userObj;
       }
     }
   }

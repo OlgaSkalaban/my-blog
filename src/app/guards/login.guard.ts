@@ -16,16 +16,10 @@ export class LoginGuard implements CanActivate {
   } 
   
   checkLogin(url: string): boolean|UrlTree {
-    if (!this.auth.user.isLoggedIn) { 
-      return true;
-    } else return this.router.parseUrl('/home');
-  }
-
-  // guardUser = this.auth.user;
-
-  // canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean> | boolean {    
-  //   if (this.guardUser.isLoggedIn) { 
-  //     return false;
-  //   } else return true;
-  // }  
+    if (localStorage.getItem('token')) {
+      console.log('пользователь авторизован');
+      return this.router.parseUrl('/home');      
+    }
+    return true;
+  }  
 } 

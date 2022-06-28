@@ -10,9 +10,15 @@ export class HomePageComponent implements OnInit {
   
   userName = "";
 
-  constructor(private auth: AuthService) {} 
+  constructor(private auth: AuthService) {}   
   
   ngOnInit() {
-    this.userName = this.auth.getCurrentUser().replace(/[^a-zа-яё0-9@.]/gi, ' ');
+    if (localStorage.getItem('token')) {
+      //console.log('пользователь авторизован');
+      this.auth.getCurrentUser().isLoggedIn = true;
+      this.userName = this.auth.getCurrentUser().name.replace(/[^a-zа-яё0-9@.]/gi, ' ');
+    } //else {
+    //   console.log('Пользователь не авторизован');
+    // }    
   }  
 }
