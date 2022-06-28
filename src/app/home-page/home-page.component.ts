@@ -10,12 +10,8 @@ export class HomePageComponent implements OnInit {
   
   userName = "";
 
-  constructor(private auth: AuthService) {}  
-
-  // logout() {
-  //   this.auth.logout();
-  // }
-
+  constructor(private auth: AuthService) {} 
+  
   ngOnInit() {
     this.userName = this.auth.getCurrentUser().replace(/[^a-zа-яё0-9@.]/gi, ' ');
   }  

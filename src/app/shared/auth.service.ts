@@ -8,7 +8,7 @@ import { User } from 'src/app/shared/user';
   providedIn: 'root'
 })
 export class AuthService {  
-  redirectUrl: string = '';
+  //redirectUrl: string = '';
   user: User = {
     id: '',
     name: '',
@@ -19,9 +19,11 @@ export class AuthService {
 
   getCurrentUser() {
     if (localStorage.getItem('token')) {
-      const userJ: any = localStorage.getItem('token');
-      const userObj = JSON.parse(userJ);
-      return userObj.name; 
+      const userJ = localStorage.getItem('token');
+      if (userJ !== null) {
+        const userObj = JSON.parse(userJ);
+        return userObj.name;
+      }
     }
   }
 
@@ -93,7 +95,7 @@ export class AuthService {
     return this.user.isLoggedIn;
   }
 
-  setUserData(id: any, name: any) {
+  setUserData(id: string, name: string) {
     this.user.id = JSON.stringify(id);
     this.user.name = JSON.stringify(name);
     localStorage.setItem('token', JSON.stringify(this.user));
