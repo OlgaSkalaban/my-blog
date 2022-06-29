@@ -12,6 +12,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from '../environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeGuard } from './guards/home.guard';
+import { LoginGuard } from './guards/login.guard';
 
 
 
@@ -29,7 +30,7 @@ import { HomeGuard } from './guards/home.guard';
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule
   ],
-  providers: [ HomeGuard ],
+  providers: [ HomeGuard, LoginGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,7 +8,6 @@ import { User } from 'src/app/shared/user';
   providedIn: 'root'
 })
 export class AuthService {  
-  redirectUrl: string = '';
   user: User = {
     id: '',
     name: '',
@@ -29,7 +28,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
-      console.log(JSON.stringify(res));
+      //console.log(JSON.stringify(res));
       this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.email));
       this.user.isLoggedIn = true;    
       this.router.navigate(['home']);
@@ -44,7 +43,7 @@ export class AuthService {
       alert('Registration succesful');
       this.router.navigate(['/login']);
     }, err => {
-      alert(err.message);
+      //alert(err.message);
       this.router.navigate(['/signup'])
     })
   }
@@ -55,8 +54,8 @@ export class AuthService {
       this.user.isLoggedIn = false;
       this.router.navigate(['/login']);
     }, err => {
-      alert('smth wrong...');
-      alert(err.message);
+      // alert('smth wrong...');
+      // alert(err.message);
     })
   }
 
@@ -91,9 +90,9 @@ export class AuthService {
     })
   }
 
-  getUserStatus() {
-    return this.user.isLoggedIn;
-  }
+  // getUserStatus() {
+  //   return this.user.isLoggedIn;
+  // }
 
   setUserData(id: string, name: string) {
     this.user.id = JSON.stringify(id);

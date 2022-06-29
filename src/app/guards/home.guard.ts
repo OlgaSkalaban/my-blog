@@ -13,19 +13,19 @@ export class HomeGuard implements CanActivate {
   authUser = this.auth.user;
 
   canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean|UrlTree {
-    const url: string = state.url;
-    return this.checkLogin(url);
+    //return this.checkLogin();
+    if (localStorage.getItem('token')) {      
+      return true;
+    }    
+    alert('You are not an authorized user. Please, log in!');    
+    return this.router.parseUrl('/login');
   } 
   
-  checkLogin(url: string): boolean|UrlTree {
-    //console.log('Статус юзера:', this.authUser.isLoggedIn);
-    if (localStorage.getItem('token')) {
-      //console.log('пользователь существует и авторизован');
-      return true;
-    }
-    
-    alert('You are not an authorized user. Please, log in!');
-    this.auth.redirectUrl = url;
-    return this.router.parseUrl('/login');
-  }
+  // checkLogin(): boolean|UrlTree {    
+  //   if (localStorage.getItem('token')) {      
+  //     return true;
+  //   }    
+  //   alert('You are not an authorized user. Please, log in!');    
+  //   return this.router.parseUrl('/login');
+  // }
 }

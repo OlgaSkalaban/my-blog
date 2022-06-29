@@ -8,29 +8,21 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class SignupFormComponent implements OnInit {
 
-  email: string = '';
-  password: string = '';
+  userEmail: string = '';
+  userPassword: string = '';
 
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('token')) {
+      this.auth.getCurrentUser().isLoggedIn = true;      
+    }
   }  
 
   register(){
-    if (this.email == '') {
-      alert('Please, enter email');
-      return;
-    }
+    this.auth.register(this.userEmail, this.userPassword);
 
-    if (this.password == '') {
-      alert('Please, enter password');
-      return;
-    }
-
-    this.auth.register(this.email, this.password);
-
-    this.email = '';
-    this.password = '';
+    this.userEmail = '';
+    this.userPassword = '';
   } 
-
 }

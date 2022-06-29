@@ -12,7 +12,7 @@ const routes: Routes = [];
   imports: [RouterModule.forRoot([
     {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'login', component: LoginFormComponent, canActivate: [LoginGuard]},
-    {path: 'signup', component: SignupFormComponent},
+    {path: 'signup', component: SignupFormComponent, canActivate: [LoginGuard]},
     {path: 'home', component: HomePageComponent, canActivate: [HomeGuard]}
   ])],
   exports: [RouterModule]

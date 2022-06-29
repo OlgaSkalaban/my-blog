@@ -11,15 +11,19 @@ export class LoginGuard implements CanActivate {
   constructor (private auth: AuthService, private router: Router) {}
 
   canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean|UrlTree {
-    const url: string = state.url;
-    return this.checkLogin(url);
-  } 
-  
-  checkLogin(url: string): boolean|UrlTree {
+    //return this.checkLogin();
     if (localStorage.getItem('token')) {
       console.log('пользователь авторизован');
       return this.router.parseUrl('/home');      
     }
     return true;
-  }  
+  } 
+  
+  // checkLogin(): boolean|UrlTree {
+  //   if (localStorage.getItem('token')) {
+  //     console.log('пользователь авторизован');
+  //     return this.router.parseUrl('/home');      
+  //   }
+  //   return true;
+  // }  
 } 

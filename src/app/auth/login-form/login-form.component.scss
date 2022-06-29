@@ -6,3 +6,17 @@ img {
 a {
     display: block;;
 }
+
+.invalid-feedback-email {
+    display: none;
+    width: 100%;
+    font-size: .875em;
+    color: #dc3545;
+}
+
+.invalid-feedback-password {
+    display: none;
+    width: 100%;
+    font-size: .875em;
+    color: #dc3545; 
+}

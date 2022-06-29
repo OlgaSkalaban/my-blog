@@ -8,31 +8,21 @@ import { AuthService } from '../../shared/auth.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  email: string = '';
-  password: string = '';
+  userEmail: string = '';
+  userPassword: string = '';  
+
   constructor(private auth: AuthService) { }  
   
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
       this.auth.getCurrentUser().isLoggedIn = true;      
-    } else {
-      console.log('Пользователь не авторизован');
     }
   }
 
   login(){
-    if (this.email == '') {
-      alert('Please, enter email');
-      return;
-    }
-    if (this.password == '') {
-      alert('Please, enter password');
-      return;
-    }
-    this.auth.login(this.email, this.password);
-    this.email = '';
-    this.password = '';
+    this.auth.login(this.userEmail, this.userPassword); 
   }
+  
 
   signInWithGoogle() {
     this.auth.googleSignIn();
@@ -44,5 +34,5 @@ export class LoginFormComponent implements OnInit {
 
   signInWithGithub() {
     this.auth.signInGithub();
-  }
+  }  
 }
