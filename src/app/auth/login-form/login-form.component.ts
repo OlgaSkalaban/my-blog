@@ -14,9 +14,9 @@ export class LoginFormComponent implements OnInit {
   constructor(private auth: AuthService) { }  
   
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.auth.getCurrentUser().isLoggedIn = true;      
-    }
+    // if (localStorage.getItem('token')) {
+    //   this.auth.getCurrentUser().isLoggedIn = true;      
+    // }
   }
 
   login(){

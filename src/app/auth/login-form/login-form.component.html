@@ -3,7 +3,7 @@
         <div class="col"></div>
 
         <div class="col-4">
-            <div class="card shadow mt-5">
+            <div class="card shadow mt-3">
                 <div class="card-body">
                     <form>
                         <div class="mb-3">
@@ -11,13 +11,13 @@
                         </div>
 
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Email</label>
+                          <label class="form-label">Email</label>
                           <input type="email" class="form-control" name="email" [(ngModel)]="userEmail" #email="ngModel" required email>
                           <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">Please, enter an email</div>
                         </div>
 
                         <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Password</label>
+                          <label class="form-label">Password</label>
                           <input type="password" class="form-control" name="password" [(ngModel)]="userPassword" #password="ngModel" required minlength="4">
                           <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">Please, enter a password</div>
                         </div>
@@ -31,31 +31,24 @@
                             <a routerLink="/signup"><span class="text-danger">Register</span></a>
                           </div>
                         </div>
-
                         
                         <p class="card-title text-center mt-3">Sign in with</p>
 
-
                         <div class="button-group-vertical d-grid">
                           
-                          <button type="button" class="btn btn-outline-dark mb-1">
-                            <a (click)="signInWithGoogle()">
-                              <img src="../../assets/icons8-google-48.png" alt="google icon"> Google
-                            </a>
-                          </button>
-                           
+                          <button type="button" class="btn btn-outline-dark mb-1" (click)="signInWithGoogle()">
+                            <img src="../../assets/icons8-google-48.png" alt="google icon">
+                             Google
+                          </button>                           
                                                           
-                          <button type="button" class="btn btn-outline-dark mb-1">
-                            <a (click)="signInWithFacebook()">
-                              <img src="../../assets/icons8-facebook-48.png" alt="Facebook icon"> Facebook
-                            </a>
-                          </button>    
-                            
+                          <button type="button" class="btn btn-outline-dark mb-1" (click)="signInWithFacebook()">
+                            <img src="../../assets/icons8-facebook-48.png" alt="Facebook icon">
+                             Facebook                            
+                          </button>                           
                                                           
-                          <button type="button" class="btn btn-outline-dark">
-                            <a (click)="signInWithGithub()">
-                              <img src="../../assets/icons8-github-48.png" alt="VK icon"> Github
-                            </a>
+                          <button type="button" class="btn btn-outline-dark" (click)="signInWithGithub()">
+                            <img src="../../assets/icons8-github-48.png" alt="VK icon">
+                             Github
                           </button>
                            
                         </div>

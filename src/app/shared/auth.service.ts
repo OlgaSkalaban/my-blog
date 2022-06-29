@@ -16,19 +16,16 @@ export class AuthService {
 
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
-  getCurrentUser() {
-    if (localStorage.getItem('token')) {
-      const userJ = localStorage.getItem('token');
-      if (userJ !== null) {
-        const userObj = JSON.parse(userJ);
-        return userObj;
-      }
+  getCurrentUser() {    
+    const userJ = localStorage.getItem('token');
+    if (userJ !== null) {
+      const userObj = JSON.parse(userJ);
+      return userObj;
     }
   }
 
   login(email: string, password: string) {
     this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
-      //console.log(JSON.stringify(res));
       this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.email));
       this.user.isLoggedIn = true;    
       this.router.navigate(['home']);
@@ -43,7 +40,7 @@ export class AuthService {
       alert('Registration succesful');
       this.router.navigate(['/login']);
     }, err => {
-      //alert(err.message);
+      alert(err.message);
       this.router.navigate(['/signup'])
     })
   }
@@ -90,9 +87,12 @@ export class AuthService {
     })
   }
 
-  // getUserStatus() {
-  //   return this.user.isLoggedIn;
-  // }
+  checkUserStatus(): boolean {
+    if (localStorage.getItem('token')) {
+      return true;
+    }
+    return false;    
+  }
 
   setUserData(id: string, name: string) {
     this.user.id = JSON.stringify(id);

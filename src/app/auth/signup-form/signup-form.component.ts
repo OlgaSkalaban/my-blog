@@ -14,15 +14,26 @@ export class SignupFormComponent implements OnInit {
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.auth.getCurrentUser().isLoggedIn = true;      
-    }
+    // if (localStorage.getItem('token')) {
+    //   this.auth.getCurrentUser().isLoggedIn = true;      
+    // }
   }  
 
   register(){
     this.auth.register(this.userEmail, this.userPassword);
-
     this.userEmail = '';
     this.userPassword = '';
-  } 
+  }
+  
+  signInWithGoogle() {
+    this.auth.googleSignIn();
+  }
+
+  signInWithFacebook() {
+    this.auth.signInFacebook();
+  }
+
+  signInWithGithub() {
+    this.auth.signInGithub();
+  }
 }

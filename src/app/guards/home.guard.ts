@@ -10,22 +10,10 @@ export class HomeGuard implements CanActivate {
 
   constructor( private auth: AuthService, private router: Router ) {}
 
-  authUser = this.auth.user;
-
   canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean|UrlTree {
-    //return this.checkLogin();
-    if (localStorage.getItem('token')) {      
-      return true;
-    }    
+    if (this.auth.checkUserStatus()) {return true};
+        
     alert('You are not an authorized user. Please, log in!');    
     return this.router.parseUrl('/login');
   } 
-  
-  // checkLogin(): boolean|UrlTree {    
-  //   if (localStorage.getItem('token')) {      
-  //     return true;
-  //   }    
-  //   alert('You are not an authorized user. Please, log in!');    
-  //   return this.router.parseUrl('/login');
-  // }
 }
