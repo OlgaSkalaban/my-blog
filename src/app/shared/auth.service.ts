@@ -14,6 +14,9 @@ export class AuthService {
     isLoggedIn: false
   };
 
+  errorMessage: string = '';
+  isError = false;
+
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
   getCurrentUser() {    
@@ -30,7 +33,8 @@ export class AuthService {
       this.user.isLoggedIn = true;    
       this.router.navigate(['home']);
     }, err => {
-      alert(err.message);
+      this.isError = true;
+      this.errorMessage = err.message;
       this.router.navigate(['/login'])
     })
   }
@@ -40,7 +44,8 @@ export class AuthService {
       alert('Registration succesful');
       this.router.navigate(['/login']);
     }, err => {
-      alert(err.message);
+      this.isError = true;
+      this.errorMessage = err.message;
       this.router.navigate(['/signup'])
     })
   }
@@ -51,8 +56,8 @@ export class AuthService {
       this.user.isLoggedIn = false;
       this.router.navigate(['/login']);
     }, err => {
-      // alert('smth wrong...');
-      // alert(err.message);
+      this.isError = true;
+      this.errorMessage = err.message;
     })
   }
 
@@ -63,7 +68,8 @@ export class AuthService {
       this.router.navigate(['/home']);
       this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName));
     }, err => {
-      alert(err.message);
+      this.isError = true;
+      this.errorMessage = err.message;
     })
   }
 
@@ -73,7 +79,8 @@ export class AuthService {
       this.router.navigate(['/home']);
       this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName)); 
     }, err => {
-      alert(err.message);
+      this.isError = true;
+      this.errorMessage = err.message;
     })
   }
 
@@ -83,11 +90,12 @@ export class AuthService {
       this.router.navigate(['/home']);
       this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName)); 
     }, err => {
-      alert(err.message);
+      this.isError = true;
+      this.errorMessage = err.message;
     })
   }
 
-  checkUserStatus(): boolean {
+  checkUserStatus() {
     if (localStorage.getItem('token')) {
       return true;
     }

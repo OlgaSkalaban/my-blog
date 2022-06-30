@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
@@ -6,18 +6,12 @@ import { AuthService } from 'src/app/shared/auth.service';
   templateUrl: './signup-form.component.html',
   styleUrls: ['./signup-form.component.scss']
 })
-export class SignupFormComponent implements OnInit {
+export class SignupFormComponent {
 
   userEmail: string = '';
-  userPassword: string = '';
+  userPassword: string = '';  
 
-  constructor(private auth: AuthService) { }
-
-  ngOnInit(): void {
-    // if (localStorage.getItem('token')) {
-    //   this.auth.getCurrentUser().isLoggedIn = true;      
-    // }
-  }  
+  constructor(public auth: AuthService) { }  
 
   register(){
     this.auth.register(this.userEmail, this.userPassword);

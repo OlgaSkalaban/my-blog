@@ -1,6 +1,17 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col"></div>
+    
+        <div class="col-6">
+          <div *ngIf="this.auth.isError" class="alert alert-danger alert-dismissible" role="alert">
+            <div>{{this.auth.errorMessage}}</div>
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+          </div>
+        </div>
+
+        <div class="col"></div> 
+    <div class="row">
+        <div class="col"></div>
 
         <div class="col-4">
             <div class="card shadow mt-3">

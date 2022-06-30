@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
 
 @Component({
@@ -6,23 +6,16 @@ import { AuthService } from '../../shared/auth.service';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
 
   userEmail: string = '';
-  userPassword: string = '';  
+  userPassword: string = '';     
 
-  constructor(private auth: AuthService) { }  
-  
-  ngOnInit(): void {
-    // if (localStorage.getItem('token')) {
-    //   this.auth.getCurrentUser().isLoggedIn = true;      
-    // }
-  }
+  constructor(public auth: AuthService) { }
 
-  login(){
-    this.auth.login(this.userEmail, this.userPassword); 
-  }
-  
+  login(): void{
+    this.auth.login(this.userEmail, this.userPassword);
+  }  
 
   signInWithGoogle() {
     this.auth.googleSignIn();
@@ -34,5 +27,5 @@ export class LoginFormComponent implements OnInit {
 
   signInWithGithub() {
     this.auth.signInGithub();
-  }  
+  }
 }
