@@ -4,8 +4,8 @@
     <div class="col"></div>
 
     <div class="col-6">
-      <div *ngIf="this.auth.isError" class="alert alert-danger alert-dismissible" role="alert">
-        <div>{{this.auth.errorMessage}}</div>
+      <div *ngIf="isError" class="alert alert-danger alert-dismissible" role="alert">
+        <div>{{errorMessage}}</div>
         <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
       </div>
     </div>

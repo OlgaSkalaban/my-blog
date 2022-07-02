@@ -27,72 +27,38 @@ export class AuthService {
     }
   }
 
-  login(email: string, password: string) {
-    this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
-      this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.email));
-      this.user.isLoggedIn = true;    
-      this.router.navigate(['home']);
-    }, err => {
-      this.isError = true;
-      this.errorMessage = err.message;
-      this.router.navigate(['/login'])
-    })
+  async login(email: string, password: string) {
+    const res = await this.fireauth.signInWithEmailAndPassword(email, password);
+    this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.email));
+    this.user.isLoggedIn = true;
   }
 
-  register(email: string, password:string) {
-    this.fireauth.createUserWithEmailAndPassword(email, password).then( () => {
-      alert('Registration succesful');
-      this.router.navigate(['/login']);
-    }, err => {
-      this.isError = true;
-      this.errorMessage = err.message;
-      this.router.navigate(['/signup'])
-    })
+  async register(email: string, password:string) {
+    return await this.fireauth.createUserWithEmailAndPassword(email, password);
   }
 
-  logout() {
-    this.fireauth.signOut().then( ()=> {
-      localStorage.removeItem('token');
-      this.user.isLoggedIn = false;
-      this.router.navigate(['/login']);
-    }, err => {
-      this.isError = true;
-      this.errorMessage = err.message;
-    })
+  async logout() {
+    await this.fireauth.signOut();
+    localStorage.removeItem('token');
+    this.user.isLoggedIn = false;
   }
 
-  googleSignIn() {
-    return this.fireauth.signInWithPopup(new GoogleAuthProvider).then(res => {
-      this.user.isLoggedIn = true;
-      console.log(this.user.isLoggedIn);
-      this.router.navigate(['/home']);
-      this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName));
-    }, err => {
-      this.isError = true;
-      this.errorMessage = err.message;
-    })
+  async googleSignIn() {
+    const res = await this.fireauth.signInWithPopup(new GoogleAuthProvider);
+    this.user.isLoggedIn = true;
+    this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName));
   }
 
-  signInFacebook() {
-    return this.fireauth.signInWithPopup(new FacebookAuthProvider).then(res => {
-      this.user.isLoggedIn = true;
-      this.router.navigate(['/home']);
-      this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName)); 
-    }, err => {
-      this.isError = true;
-      this.errorMessage = err.message;
-    })
+  async signInFacebook() {
+    const res = await this.fireauth.signInWithPopup(new FacebookAuthProvider);
+    this.user.isLoggedIn = true;
+    this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName));
   }
 
-  signInGithub() {
-    return this.fireauth.signInWithPopup(new GithubAuthProvider).then(res => {
-      this.user.isLoggedIn = true;
-      this.router.navigate(['/home']);
-      this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName)); 
-    }, err => {
-      this.isError = true;
-      this.errorMessage = err.message;
-    })
+  async signInGithub() {
+    const res = await this.fireauth.signInWithPopup(new GithubAuthProvider);
+    this.user.isLoggedIn = true;
+    this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName));
   }
 
   checkUserStatus() {

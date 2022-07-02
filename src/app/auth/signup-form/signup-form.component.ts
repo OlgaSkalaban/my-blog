@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
@@ -9,25 +10,52 @@ import { AuthService } from 'src/app/shared/auth.service';
 export class SignupFormComponent {
 
   userEmail: string = '';
-  userPassword: string = '';  
+  userPassword: string = '';
+  errorMessage: string = '';
+  isError = false;
+  isRegister = false;  
 
-  constructor(public auth: AuthService) { }  
+  constructor(public auth: AuthService, private router: Router) { }  
 
   register(){
-    this.auth.register(this.userEmail, this.userPassword);
-    this.userEmail = '';
-    this.userPassword = '';
+    this.auth.register(this.userEmail, this.userPassword).then(() => {
+      this.isError = false;
+      this.isRegister = true;
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 5000);      
+    }, err => {
+      this.isError = true;
+      this.errorMessage = err.message;      
+    });
+    // this.userEmail = '';
+    // this.userPassword = '';
   }
   
   signInWithGoogle() {
-    this.auth.googleSignIn();
+    this.auth.googleSignIn().then(() => {
+      this.router.navigate(['/home']);
+    }, err => {
+      this.isError = true;
+      this.errorMessage = err.message;
+    });    
   }
 
   signInWithFacebook() {
-    this.auth.signInFacebook();
+    this.auth.signInFacebook().then(() => {
+      this.router.navigate(['/home']);
+    }, err => {
+      this.isError = true;
+      this.errorMessage = err.message;
+    });    
   }
 
   signInWithGithub() {
-    this.auth.signInGithub();
+    this.auth.signInGithub().then(() => {
+      this.router.navigate(['/home']);
+    }, err => {
+      this.isError = true;
+      this.errorMessage = err.message;
+    });    
   }
 }
