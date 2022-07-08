@@ -9,20 +9,20 @@ import { AuthService } from '../shared/auth.service';
 })
 export class NavbarComponent implements OnInit {   
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
-  navUser = this.auth.user;
+  navUser = this.authService.user;
   isError = false;
   errorMessage = '';
 
   ngOnInit(): void { 
-    if (this.auth.checkUserStatus()) {
+    if (this.authService.checkUserStatus()) {
       this.navUser.isLoggedIn = true;
     }
   } 
 
   logout() {
-    this.auth.logout().then(() => {
+    this.authService.logout().then(() => {
       this.router.navigate(['/login']);
     }, err => {
       this.isError = true;

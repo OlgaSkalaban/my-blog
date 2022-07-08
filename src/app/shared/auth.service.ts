@@ -14,9 +14,6 @@ export class AuthService {
     isLoggedIn: false
   };
 
-  errorMessage: string = '';
-  isError = false;
-
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
   getCurrentUser() {    

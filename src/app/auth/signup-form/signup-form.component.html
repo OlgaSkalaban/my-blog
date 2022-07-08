@@ -4,8 +4,7 @@
     
         <div class="col-6">
           <div *ngIf="isError" class="alert alert-danger alert-dismissible" role="alert">
-            <div>{{errorMessage}}</div>
-            <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+            <div>{{errorMessage}}</div>            
           </div>
 
           <div *ngIf="isRegister" class="alert alert-success" role="alert">
@@ -13,7 +12,8 @@
           </div>
         </div>
         
-        <div class="col"></div> 
+        <div class="col"></div>
+
     <div class="row">
         <div class="col"></div>
 
@@ -28,21 +28,27 @@
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <input type="email" class="form-control" required email name="email" [(ngModel)]="userEmail" #email="ngModel">
-                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">Please, enter an email</div>
+                            <div *ngIf="email.invalid && email.touched" class="alert alert-danger">Please, enter an email</div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" [(ngModel)]="userPassword" #password="ngModel" required minlength="4">
-                            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">Please, enter a password</div>
+                            <input type="password" class="form-control" name="password" [(ngModel)]="userPassword" #password="ngModel" required minlength="6">
+                            <div *ngIf="password.invalid && password.touched" class="alert alert-danger">Please, enter a password</div>
                         </div>
                         <div class="d-grid">
                             <button [disabled]="email.invalid || password.invalid" type="button" class="btn btn-warning" (click)="register()">Register</button>
-                         </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">Have an account?
+                                <a routerLink="/login"><span class="text-danger">Login</span></a>
+                            </div>
+                        </div>
 
                         <hr class="mt-3">
 
-                        <p class="card-title text-center mt-3"> or Sign in with</p>
+                        <p class="card-title text-center mt-3">OR SIGN UP WITH</p>
 
                         <div class="button-group-vertical d-grid">
                           
@@ -61,13 +67,7 @@
                              Github
                           </button>
                            
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col">Have an account?
-                                <a routerLink="/login"><span class="text-danger">Login</span></a>
-                            </div>
-                        </div>
+                        </div>                        
                     </form>
                 </div>
             </div>

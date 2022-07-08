@@ -15,10 +15,10 @@ export class SignupFormComponent {
   isError = false;
   isRegister = false;  
 
-  constructor(public auth: AuthService, private router: Router) { }  
+  constructor(public authService: AuthService, private router: Router) { }  
 
   register(){
-    this.auth.register(this.userEmail, this.userPassword).then(() => {
+    this.authService.register(this.userEmail, this.userPassword).then(() => {
       this.isError = false;
       this.isRegister = true;
       setTimeout(() => {
@@ -33,7 +33,7 @@ export class SignupFormComponent {
   }
   
   signInWithGoogle() {
-    this.auth.googleSignIn().then(() => {
+    this.authService.googleSignIn().then(() => {
       this.router.navigate(['/home']);
     }, err => {
       this.isError = true;
@@ -42,7 +42,7 @@ export class SignupFormComponent {
   }
 
   signInWithFacebook() {
-    this.auth.signInFacebook().then(() => {
+    this.authService.signInFacebook().then(() => {
       this.router.navigate(['/home']);
     }, err => {
       this.isError = true;
@@ -51,7 +51,7 @@ export class SignupFormComponent {
   }
 
   signInWithGithub() {
-    this.auth.signInGithub().then(() => {
+    this.authService.signInGithub().then(() => {
       this.router.navigate(['/home']);
     }, err => {
       this.isError = true;

@@ -14,20 +14,19 @@ export class LoginFormComponent {
   errorMessage: string = '';
   isError = false;    
 
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   login(): void{
-    this.auth.login(this.userEmail, this.userPassword).then(()=> {
+    this.authService.login(this.userEmail, this.userPassword).then(()=> {
       this.router.navigate(['home']);
     }, err => {      
       this.isError = true;     
       this.errorMessage = err.message;
-      this.router.navigate(['/login'])
     });
   }  
 
   signInWithGoogle() {
-    this.auth.googleSignIn().then(() => {
+    this.authService.googleSignIn().then(() => {
       this.router.navigate(['/home']);
     }, err => {
       this.isError = true;
@@ -36,7 +35,7 @@ export class LoginFormComponent {
   }
 
   signInWithFacebook() {
-    this.auth.signInFacebook().then(() => {
+    this.authService.signInFacebook().then(() => {
       this.router.navigate(['/home']);
     }, err => {
       this.isError = true;
@@ -45,7 +44,7 @@ export class LoginFormComponent {
   }
 
   signInWithGithub() {
-    this.auth.signInGithub().then(() => {
+    this.authService.signInGithub().then(() => {
       this.router.navigate(['/home']);
     }, err => {
       this.isError = true;

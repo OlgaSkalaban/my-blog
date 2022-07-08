@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
 
 @Component({
@@ -6,15 +6,9 @@ import { AuthService } from '../shared/auth.service';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit {
-  
-  userName = "";
+export class HomePageComponent {
 
-  constructor(private auth: AuthService) {}   
-  
-  ngOnInit() {
-    if (this.auth.checkUserStatus()) {
-      this.userName = this.auth.getCurrentUser().name.replace(/[^a-zа-яё0-9@.]/gi, ' ');
-    }   
-  }  
+  constructor(private authService: AuthService) {}
+
+  userName = this.authService.getCurrentUser().name.replace(/[^a-zа-яё0-9@.]/gi, ' ');     
 }
