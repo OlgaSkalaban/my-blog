@@ -8,10 +8,10 @@ import { AuthService } from '../shared/auth.service';
 })
 export class HomeGuard implements CanActivate {
 
-  constructor( private auth: AuthService, private router: Router ) {}
+  constructor( private authService: AuthService, private router: Router ) {}
 
   canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean|UrlTree {
-    if (this.auth.checkUserStatus()) {return true};
+    if (this.authService.checkUserStatus()) {return true};
         
     alert('You are not an authorized user. Please, log in!');    
     return this.router.parseUrl('/login');

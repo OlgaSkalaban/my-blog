@@ -10,5 +10,5 @@ export class HomePageComponent {
 
   constructor(private authService: AuthService) {}
 
-  userName = this.authService.getCurrentUser().name.replace(/[^a-zа-яё0-9@.]/gi, ' ');     
+  userName = this.authService.getCurrentUser().name;    
 }

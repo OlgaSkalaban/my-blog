@@ -1,73 +1,80 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider} from '@angular/fire/auth'
-import { Router } from '@angular/router';
 import { User } from 'src/app/shared/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {  
+export class AuthService {
+
   user: User = {
     id: '',
     name: '',
     isLoggedIn: false
-  };
+  }
 
-  constructor(private fireauth: AngularFireAuth, private router: Router) { }
+  constructor(private fireauth: AngularFireAuth) { }
 
-  getCurrentUser() {    
-    const userJ = localStorage.getItem('token');
-    if (userJ !== null) {
-      const userObj = JSON.parse(userJ);
-      return userObj;
+  getCurrentUser(): any {
+    let lsData = localStorage.getItem('userInfo');    
+    if (lsData !== null) {
+      const userData = JSON.parse(lsData);   
+      return userData;
     }
   }
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<void> {
     const res = await this.fireauth.signInWithEmailAndPassword(email, password);
-    this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.email));
-    this.user.isLoggedIn = true;
+    if (res.user?.uid && res.user?.email) {
+      this.setUserData(res.user?.uid, res.user?.email, true);
+    }
   }
 
-  async register(email: string, password:string) {
-    return await this.fireauth.createUserWithEmailAndPassword(email, password);
+  async register(email: string, password:string): Promise<void> {
+    const res = await this.fireauth.createUserWithEmailAndPassword(email, password);
+    if (res.user?.uid && res.user?.email) {
+      this.setUserData(res.user?.uid, res.user?.email, true);
+    }    
   }
 
-  async logout() {
+  async logout(): Promise<void> {
     await this.fireauth.signOut();
-    localStorage.removeItem('token');
-    this.user.isLoggedIn = false;
+    localStorage.removeItem('userInfo');
   }
 
-  async googleSignIn() {
+  async googleSignIn(): Promise<void> {
     const res = await this.fireauth.signInWithPopup(new GoogleAuthProvider);
-    this.user.isLoggedIn = true;
-    this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName));
+    if (res.user?.uid && res.user?.displayName) {
+      this.setUserData(res.user?.uid, res.user?.displayName, true);
+    }    
   }
 
-  async signInFacebook() {
+  async signInFacebook(): Promise<void> {
     const res = await this.fireauth.signInWithPopup(new FacebookAuthProvider);
-    this.user.isLoggedIn = true;
-    this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName));
+    if (res.user?.uid && res.user?.displayName) {
+      this.setUserData(res.user?.uid, res.user?.displayName, true);
+    }
   }
 
-  async signInGithub() {
+  async signInGithub(): Promise<void> {
     const res = await this.fireauth.signInWithPopup(new GithubAuthProvider);
-    this.user.isLoggedIn = true;
-    this.setUserData(JSON.stringify(res.user?.uid), JSON.stringify(res.user?.displayName));
+    if (res.user?.uid && res.user?.displayName) {
+      this.setUserData(res.user?.uid, res.user?.displayName, true);
+    }
   }
 
-  checkUserStatus() {
-    if (localStorage.getItem('token')) {
+  checkUserStatus(): boolean {
+    if (localStorage.getItem('userInfo')) {
       return true;
     }
     return false;    
   }
 
-  setUserData(id: string, name: string) {
-    this.user.id = JSON.stringify(id);
-    this.user.name = JSON.stringify(name);
-    localStorage.setItem('token', JSON.stringify(this.user));
+  setUserData(id: string, name: string, login: boolean): void {
+    this.user.id = id;
+    this.user.name = name;
+    this.user.isLoggedIn = login;
+    localStorage.setItem('userInfo', JSON.stringify(this.user));
   }
 }

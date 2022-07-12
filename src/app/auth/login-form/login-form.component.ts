@@ -12,42 +12,42 @@ export class LoginFormComponent {
   userEmail: string = '';
   userPassword: string = ''; 
   errorMessage: string = '';
-  isError = false;    
+  isLoggedIn: boolean = false;
 
   constructor(public authService: AuthService, private router: Router) { }
 
   login(): void{
     this.authService.login(this.userEmail, this.userPassword).then(()=> {
+      this.isLoggedIn = true;
       this.router.navigate(['home']);
     }, err => {      
-      this.isError = true;     
       this.errorMessage = err.message;
     });
   }  
 
   signInWithGoogle() {
     this.authService.googleSignIn().then(() => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      this.isError = true;
       this.errorMessage = err.message;
     });    
   }
 
   signInWithFacebook() {
     this.authService.signInFacebook().then(() => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      this.isError = true;
       this.errorMessage = err.message;
     });    
   }
 
   signInWithGithub() {
     this.authService.signInGithub().then(() => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      this.isError = true;
       this.errorMessage = err.message;
     });    
   }

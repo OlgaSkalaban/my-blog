@@ -3,13 +3,9 @@
         <div class="col"></div>
     
         <div class="col-6">
-          <div *ngIf="isError" class="alert alert-danger alert-dismissible" role="alert">
+          <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible" role="alert">
             <div>{{errorMessage}}</div>            
-          </div>
-
-          <div *ngIf="isRegister" class="alert alert-success" role="alert">
-            <div>Registration complete successfully!</div>
-          </div>
+          </div>          
         </div>
         
         <div class="col"></div>

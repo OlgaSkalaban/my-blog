@@ -12,49 +12,43 @@ export class SignupFormComponent {
   userEmail: string = '';
   userPassword: string = '';
   errorMessage: string = '';
-  isError = false;
-  isRegister = false;  
+  isLoggedIn: boolean = false;
 
   constructor(public authService: AuthService, private router: Router) { }  
 
   register(){
     this.authService.register(this.userEmail, this.userPassword).then(() => {
-      this.isError = false;
-      this.isRegister = true;
-      setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 5000);      
+      this.isLoggedIn = true;
+      this.router.navigate(['/home']);                  
     }, err => {
-      this.isError = true;
       this.errorMessage = err.message;      
     });
-    // this.userEmail = '';
-    // this.userPassword = '';
   }
   
   signInWithGoogle() {
     this.authService.googleSignIn().then(() => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      this.isError = true;
-      this.errorMessage = err.message;
+      console.log(err);      
+     this.errorMessage = err.message;
     });    
   }
 
   signInWithFacebook() {
     this.authService.signInFacebook().then(() => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      this.isError = true;
       this.errorMessage = err.message;
     });    
   }
 
   signInWithGithub() {
     this.authService.signInGithub().then(() => {
+      this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      this.isError = true;
       this.errorMessage = err.message;
     });    
   }

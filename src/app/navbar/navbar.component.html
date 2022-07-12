@@ -1,6 +1,6 @@
 <nav class="navbar bg-warning">
     <div class="container-fluid">
       <a class="navbar-brand h1" routerLink="/home">L O G O</a>
-      <button *ngIf="navUser.isLoggedIn" type="button" class="btn btn-outline-dark text-center" (click)="logout()">Logout</button> 
+      <button *ngIf="navUser.isLoggedIn" type="button" class="btn btn-outline-dark text-center" (click)="logout()">{{navUser.isLoggedIn}} Logout</button> 
     </div>
-  </nav>
+</nav>

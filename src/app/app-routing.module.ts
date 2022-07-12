@@ -13,7 +13,8 @@ const routes: Routes = [];
     {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'login', component: LoginFormComponent, canActivate: [LoginGuard]},
     {path: 'signup', component: SignupFormComponent, canActivate: [LoginGuard]},
-    {path: 'home', component: HomePageComponent, canActivate: [HomeGuard]}
+    {path: 'home', component: HomePageComponent, canActivate: [HomeGuard]},
+    {path: '**', redirectTo: 'login'}
   ])],
   exports: [RouterModule]
 })

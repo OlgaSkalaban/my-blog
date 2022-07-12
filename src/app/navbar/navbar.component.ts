@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 
@@ -7,26 +7,16 @@ import { AuthService } from '../shared/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {   
+export class NavbarComponent {   
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  navUser = this.authService.user;
-  isError = false;
-  errorMessage = '';
-
-  ngOnInit(): void { 
-    if (this.authService.checkUserStatus()) {
-      this.navUser.isLoggedIn = true;
-    }
-  } 
+  navUser = this.authService.user;   
 
   logout() {
     this.authService.logout().then(() => {
+      this.authService.user.isLoggedIn = false;
       this.router.navigate(['/login']);
-    }, err => {
-      this.isError = true;
-      this.errorMessage = err.message;
     });
   }
 }
