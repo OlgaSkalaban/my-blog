@@ -15,7 +15,7 @@ export class NavbarComponent {
 
   logout() {
     this.authService.logout().then(() => {
-      this.authService.user.isLoggedIn = false;
+      this.navUser.isLoggedIn = false;
       this.router.navigate(['/login']);
     });
   }

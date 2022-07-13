@@ -23,14 +23,26 @@
                         
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" required email name="email" [(ngModel)]="userEmail" #email="ngModel">
-                            <div *ngIf="email.invalid && email.touched" class="alert alert-danger">Please, enter an email</div>
+                            <input type="email" class="form-control"
+                                required
+                                name="email" [(ngModel)]="userEmail" #email="ngModel"
+                                pattern="^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$">
+                            <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
+                                <div *ngIf="email.errors?.['required']">Email is required field</div>
+                                <div *ngIf="email.errors?.['pattern']">Invalid email name</div>
+                            </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" [(ngModel)]="userPassword" #password="ngModel" required minlength="6">
-                            <div *ngIf="password.invalid && password.touched" class="alert alert-danger">Please, enter a password</div>
+                            <input type="password" class="form-control" 
+                                name="password" [(ngModel)]="userPassword" #password="ngModel" 
+                                required 
+                                minlength="6">
+                            <div *ngIf="password.invalid && password.touched" class="alert alert-danger">
+                                <div *ngIf="password.errors?.['required']">Password is required field</div>
+                                <div *ngIf="password.errors?.['minlength']">The password should contain at least 6 characters</div>
+                            </div>
                         </div>
                         <div class="d-grid">
                             <button [disabled]="email.invalid || password.invalid" type="button" class="btn btn-warning" (click)="register()">Register</button>
