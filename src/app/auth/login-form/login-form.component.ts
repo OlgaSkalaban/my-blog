@@ -22,21 +22,7 @@ export class LoginFormComponent {
         this.isLoggedIn = true;
         this.router.navigate(['home']);
       }, err => {
-        let errorCode = err.code;
-        switch (errorCode) {
-          case 'auth/wrong-password':
-            this.errorMessage = 'The password or email is invalid';
-            break;
-          case 'auth/user-not-found':
-            this.errorMessage = 'The user with this email was not found.';
-            break;
-          case 'auth/too-many-requests':
-            this.errorMessage = 'Access to this account has been temporarily disabled due to many failed login attempts.';
-            break;
-          default:
-            console.log('Не тот код ошибки');  
-            break;
-        }
+        this.errorMessage = this.authService.handleError(err);
       });
   }  
 
@@ -45,11 +31,7 @@ export class LoginFormComponent {
       this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      let errorCode = err.code;
-      if (errorCode === 'auth/wrong-password') {          
-        this.errorMessage = err.message;
-      }
-      
+      this.errorMessage = this.authService.handleError(err);
     });    
   }
 
@@ -58,7 +40,7 @@ export class LoginFormComponent {
       this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      this.errorMessage = err.message;
+      this.errorMessage = this.authService.handleError(err);
     });    
   }
 
@@ -67,7 +49,7 @@ export class LoginFormComponent {
       this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      this.errorMessage = err.message;
+      this.errorMessage = this.authService.handleError(err);
     });    
   }
 }

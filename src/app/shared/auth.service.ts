@@ -77,4 +77,24 @@ export class AuthService {
     this.user.isLoggedIn = login;
     localStorage.setItem('userInfo', JSON.stringify(this.user));
   }
+
+  handleError(err: any): string { 
+    let errorCode = err.code;
+    switch (errorCode) {
+      case 'auth/wrong-password':
+        return 'The password is invalid';
+      case 'auth/user-not-found':
+        return 'The user with this email was not found.';
+      case 'auth/too-many-requests':
+        return 'Access to this account has been temporarily disabled due to many failed login attempts.';
+      case 'auth/email-already-in-use':
+        return 'The email address is already in use by another account';
+      case 'auth/account-exists-with-different-credential':
+        return 'An account already exists with the same email address';
+      case 'auth/popup-closed-by-user':        
+        return '';  
+      default:
+        return `Unknown error: ${errorCode}`;  
+    }
+  }
 }

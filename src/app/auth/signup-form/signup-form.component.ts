@@ -21,7 +21,7 @@ export class SignupFormComponent {
       this.isLoggedIn = true;
       this.router.navigate(['/home']);                  
     }, err => {
-      this.errorMessage = err.message;      
+      this.errorMessage = this.authService.handleError(err);     
     });
   }
   
@@ -30,8 +30,7 @@ export class SignupFormComponent {
       this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      console.log(err);      
-     this.errorMessage = err.message;
+      this.errorMessage = this.authService.handleError(err);
     });    
   }
 
@@ -40,7 +39,7 @@ export class SignupFormComponent {
       this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      this.errorMessage = err.message;
+      this.errorMessage = this.authService.handleError(err);
     });    
   }
 
@@ -49,7 +48,7 @@ export class SignupFormComponent {
       this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
-      this.errorMessage = err.message;
+      this.errorMessage = this.authService.handleError(err);
     });    
   }
 }
