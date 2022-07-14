@@ -24,18 +24,20 @@ export class AuthService {
     }
   }
 
-  async login(email: string, password: string): Promise<void> {
+  async login(email: string, password: string) {
     const res = await this.fireauth.signInWithEmailAndPassword(email, password);
     if (res.user?.uid && res.user?.email) {
       this.setUserData(res.user?.uid, res.user?.email, true);
     }
+    return res;
   }
 
-  async register(email: string, password:string): Promise<void> {
+  async register(email: string, password:string){
     const res = await this.fireauth.createUserWithEmailAndPassword(email, password);
     if (res.user?.uid && res.user?.email) {
       this.setUserData(res.user?.uid, res.user?.email, true);
-    }    
+    }
+    return res;    
   }
 
   async logout(): Promise<void> {
@@ -43,25 +45,28 @@ export class AuthService {
     localStorage.removeItem('userInfo');
   }
 
-  async googleSignIn(): Promise<void> {
+  async googleSignIn() {
     const res = await this.fireauth.signInWithPopup(new GoogleAuthProvider);
     if (res.user?.uid && res.user?.displayName) {
       this.setUserData(res.user?.uid, res.user?.displayName, true);
-    }    
+    }
+    return res;    
   }
 
-  async signInFacebook(): Promise<void> {
+  async signInFacebook() {
     const res = await this.fireauth.signInWithPopup(new FacebookAuthProvider);
     if (res.user?.uid && res.user?.displayName) {
       this.setUserData(res.user?.uid, res.user?.displayName, true);
     }
+    return res;
   }
 
-  async signInGithub(): Promise<void> {
+  async signInGithub() {
     const res = await this.fireauth.signInWithPopup(new GithubAuthProvider);
     if (res.user?.uid && res.user?.displayName) {
       this.setUserData(res.user?.uid, res.user?.displayName, true);
     }
+    return res;
   }
 
   checkUserStatus(): boolean {
