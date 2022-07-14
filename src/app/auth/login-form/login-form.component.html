@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="d-grid">
-                          <button [disabled]="email.invalid || password.invalid" type="button" class="btn btn-warning mb-3" (click)="login()">Login</button>
+                          <button [disabled]="email.invalid || password.invalid || isLoading" type="submit" class="btn btn-warning mb-3" (click)="login()">Login</button>
                         </div>
 
                         <div class="row">
@@ -64,17 +64,17 @@
 
                         <div class="button-group-vertical d-grid">
                           
-                          <button type="button" class="btn btn-outline-dark mb-1" (click)="signInWithGoogle()">
+                          <button type="button" class="btn btn-outline-dark mb-1" [disabled]="isLoading" (click)="signInWithGoogle()">
                             <img src="assets/icons8-google-48.png" alt="google icon">
                              Google
                           </button>                           
                                                           
-                          <button type="button" class="btn btn-outline-dark mb-1" (click)="signInWithFacebook()">
+                          <button type="button" class="btn btn-outline-dark mb-1" [disabled]="isLoading" (click)="signInWithFacebook()">
                             <img src="assets/icons8-facebook-48.png" alt="Facebook icon">
                              Facebook                            
                           </button>                           
                                                           
-                          <button type="button" class="btn btn-outline-dark" (click)="signInWithGithub()">
+                          <button type="button" class="btn btn-outline-dark" [disabled]="isLoading" (click)="signInWithGithub()">
                             <img src="assets/icons8-github-48.png" alt="VK icon">
                              Github
                           </button>

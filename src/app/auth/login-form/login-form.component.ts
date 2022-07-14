@@ -13,42 +13,51 @@ export class LoginFormComponent {
   userPassword: string = ''; 
   errorMessage: string = '';
   isLoggedIn: boolean = false;
+  isLoading: boolean = false;
 
   constructor(public authService: AuthService, private router: Router) { }
 
   login(): void {
+    this.isLoading = !this.isLoading
     this.authService.login(this.userEmail, this.userPassword)
       .then(()=> {
         this.isLoggedIn = true;
         this.router.navigate(['home']);
       }, err => {
+        this.isLoading = !this.isLoading
         this.errorMessage = this.authService.handleError(err);
       });
   }  
 
   signInWithGoogle() {
+    this.isLoading = !this.isLoading
     this.authService.googleSignIn().then(() => {
       this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
+      this.isLoading = !this.isLoading
       this.errorMessage = this.authService.handleError(err);
     });    
   }
 
   signInWithFacebook() {
+    this.isLoading = !this.isLoading
     this.authService.signInFacebook().then(() => {
       this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
+      this.isLoading = !this.isLoading
       this.errorMessage = this.authService.handleError(err);
     });    
   }
 
   signInWithGithub() {
+    this.isLoading = !this.isLoading
     this.authService.signInGithub().then(() => {
       this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }, err => {
+      this.isLoading = !this.isLoading
       this.errorMessage = this.authService.handleError(err);
     });    
   }
