@@ -10,5 +10,5 @@ export class HomePageComponent {
 
   constructor(private authService: AuthService) {}
 
-  userName = this.authService.getCurrentUser().name;    
+  userName = this.authService.getCurrentUser().email;    
 }

@@ -9,9 +9,7 @@ import { User } from 'src/app/shared/user';
 export class AuthService {
 
   user: User = {
-    id: '',
-    name: '',
-    isLoggedIn: false
+   email: ''
   }
 
   constructor(private fireauth: AngularFireAuth) { }
@@ -27,15 +25,15 @@ export class AuthService {
   async login(email: string, password: string) {
     const res = await this.fireauth.signInWithEmailAndPassword(email, password);
     if (res.user?.uid && res.user?.email) {
-      this.setUserData(res.user?.uid, res.user?.email, true);
+      this.setUserData(res.user?.email);
     }
     return res;
   }
 
-  async register(email: string, password:string){
+  async register(email: string, password:string) {
     const res = await this.fireauth.createUserWithEmailAndPassword(email, password);
     if (res.user?.uid && res.user?.email) {
-      this.setUserData(res.user?.uid, res.user?.email, true);
+      this.setUserData(res.user?.email);
     }
     return res;    
   }
@@ -48,7 +46,7 @@ export class AuthService {
   async googleSignIn() {
     const res = await this.fireauth.signInWithPopup(new GoogleAuthProvider);
     if (res.user?.uid && res.user?.displayName) {
-      this.setUserData(res.user?.uid, res.user?.displayName, true);
+      this.setUserData(res.user?.displayName);
     }
     return res;    
   }
@@ -56,7 +54,7 @@ export class AuthService {
   async signInFacebook() {
     const res = await this.fireauth.signInWithPopup(new FacebookAuthProvider);
     if (res.user?.uid && res.user?.displayName) {
-      this.setUserData(res.user?.uid, res.user?.displayName, true);
+      this.setUserData(res.user?.displayName);
     }
     return res;
   }
@@ -64,7 +62,7 @@ export class AuthService {
   async signInGithub() {
     const res = await this.fireauth.signInWithPopup(new GithubAuthProvider);
     if (res.user?.uid && res.user?.displayName) {
-      this.setUserData(res.user?.uid, res.user?.displayName, true);
+      this.setUserData(res.user?.displayName);
     }
     return res;
   }
@@ -76,10 +74,8 @@ export class AuthService {
     return false;    
   }
 
-  setUserData(id: string, name: string, login: boolean): void {
-    this.user.id = id;
-    this.user.name = name;
-    this.user.isLoggedIn = login;
+  setUserData(email: string): void {
+    this.user.email = email;
     localStorage.setItem('userInfo', JSON.stringify(this.user));
   }
 
